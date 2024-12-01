@@ -26,10 +26,10 @@ fn main() -> Result<()> {
         for line in reader.lines() {
             let line = line?;
             let pair: Vec<_> = line.split("   ").collect();
-            let left_num = pair[0].parse::<usize>();
-            let right_num = pair[1].parse::<usize>();
-            left.push(left_num?);
-            right.push(right_num?);
+            let left_num: usize = pair[0].parse()?;
+            let right_num: usize = pair[1].parse()?;
+            left.push(left_num);
+            right.push(right_num);
         }
         Ok((left, right))
     }

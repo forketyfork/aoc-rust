@@ -24,8 +24,8 @@ fn main() -> Result<()> {
         let mut left: Vec<usize> = vec![];
         let mut right: Vec<usize> = vec![];
         for line in reader.lines() {
-            let sure_line = line?;
-            let pair: Vec<_> = sure_line.split("   ").collect();
+            let line = line?;
+            let pair: Vec<_> = line.split("   ").collect();
             let left_num = pair[0].parse::<usize>();
             let right_num = pair[1].parse::<usize>();
             left.push(left_num?);

@@ -5,6 +5,7 @@ use const_format::concatcp;
 use itertools::Itertools;
 use std::fs::File;
 use std::io::{BufRead, BufReader};
+use std::iter;
 
 const DAY: &str = "2024-02";
 const INPUT_FILE: &str = concatcp!("input/", DAY, ".txt");
@@ -79,16 +80,9 @@ fn main() -> Result<()> {
             .lines()
             .filter_ok(|line| {
                 let chars: Vec<u8> = line.split(' ').map(|x| x.parse::<u8>().unwrap()).collect();
-                let len = chars.len();
-                if is_safe(chars.clone(), usize::MAX) {
-                    return true;
-                }
-                for i in 0..len {
-                    if is_safe(chars.clone(), i) {
-                        return true;
-                    }
-                }
-                false
+                iter::once(usize::MAX)
+                    .chain((0..chars.len()).into_iter())
+                    .any(|skip_index| is_safe(chars.clone(), skip_index))
             })
             .count();
         Ok(answer)

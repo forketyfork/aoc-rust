@@ -22,11 +22,11 @@ fn main() -> Result<()> {
 
     fn part1<R: BufRead>(reader: R) -> Result<usize> {
         let rx = regex::Regex::new(r"mul\((\d+),(\d+)\)")?;
-        let answer: usize = reader
+        let answer = reader
             .lines()
             .map(|line| {
                 let line = line.unwrap();
-                let result = rx
+                let result: usize = rx
                     .captures_iter(&line)
                     .map(|it| {
                         let (_, [a, b]) = it.extract();
@@ -34,7 +34,7 @@ fn main() -> Result<()> {
                         let b: usize = b.parse().unwrap();
                         a * b
                     })
-                    .sum::<usize>();
+                    .sum();
                 result
             })
             .sum();
@@ -56,11 +56,11 @@ fn main() -> Result<()> {
     fn part2<R: BufRead>(reader: R) -> Result<usize> {
         let rx = regex::Regex::new(r"(do)(\(\))|(don't)(\(\))|mul\((\d+),(\d+)\)")?;
         let mut do_command = true;
-        let answer: usize = reader
+        let answer = reader
             .lines()
             .map(|line| {
                 let line = line.unwrap();
-                let result = rx
+                let result: usize = rx
                     .captures_iter(&line)
                     .map(|it| {
                         let (_, [a, b]) = it.extract();
@@ -71,11 +71,11 @@ fn main() -> Result<()> {
                         } else if do_command {
                             let a: usize = a.parse().unwrap();
                             let b: usize = b.parse().unwrap();
-                            return a * b
+                            return a * b;
                         }
                         0
                     })
-                    .sum::<usize>();
+                    .sum();
                 result
             })
             .sum();

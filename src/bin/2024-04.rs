@@ -27,16 +27,14 @@ fn main() -> Result<()> {
     //region Part 1
     println!("=== Part 1 ===");
 
-    fn parse<R: BufRead>(reader: R) -> Vec<Vec<char>> {
+    fn parse<R: BufRead>(reader: R) -> Vec<Vec<u8>> {
         reader
             .lines()
             .map(|line| {
-                return line.unwrap().chars().collect();
+                return line.unwrap().bytes().collect();
             })
             .collect()
     }
-
-    const XMAS: &str = "XMAS";
 
     const DIRECTIONS: [(i64, i64); 8] = [
         (1, 0),
@@ -52,23 +50,25 @@ fn main() -> Result<()> {
     fn part1<R: BufRead>(reader: R) -> Result<usize> {
         let array = parse(reader);
         let mut answer = 0;
+        let xmas: Vec<u8> = "XMAS".bytes().collect();
         for i in 0..array.len() {
             for j in 0..array[i].len() {
-                'dir_loop: for dir in DIRECTIONS {
-                    for idx in 0..=3 {
-                        let ii = (i as i64) + dir.0 * idx;
-                        let jj = (j as i64) + dir.1 * idx;
-                        if ii < 0
-                            || (ii as usize) >= array.len()
-                            || jj < 0
-                            || (jj as usize) >= array[ii as usize].len()
-                            || array[ii as usize][jj as usize]
-                                != XMAS.chars().nth(idx as usize).unwrap()
-                        {
-                            continue 'dir_loop;
+                if array[i][j] == 'X' as u8 {
+                    'dir_loop: for dir in DIRECTIONS {
+                        for idx in 1..=3 {
+                            let ii = (i as i64) + dir.0 * idx;
+                            let jj = (j as i64) + dir.1 * idx;
+                            if ii < 0
+                                || (ii as usize) >= array.len()
+                                || jj < 0
+                                || (jj as usize) >= array[ii as usize].len()
+                                || array[ii as usize][jj as usize] != xmas[idx as usize]
+                            {
+                                continue 'dir_loop;
+                            }
                         }
+                        answer += 1;
                     }
-                    answer += 1;
                 }
             }
         }
@@ -87,26 +87,24 @@ fn main() -> Result<()> {
     // region Part 2
     println!("\n=== Part 2 ===");
 
+    //noinspection SpellCheckingInspection
     fn part2<R: BufRead>(reader: R) -> Result<usize> {
         let array = parse(reader);
         let mut answer = 0;
         for i in 0..array.len() - 2 {
             for j in 0..array[i].len() - 2 {
-                let s: String = [
-                    array[i][j],
-                    '.',
-                    array[i][j + 2],
-                    '.',
-                    array[i + 1][j + 1],
-                    '.',
-                    array[i + 2][j],
-                    '.',
-                    array[i + 2][j + 2],
-                ]
-                .iter()
-                .collect();
+                let s: String = String::from_utf8(
+                    [
+                        array[i][j],
+                        array[i][j + 2],
+                        array[i + 1][j + 1],
+                        array[i + 2][j],
+                        array[i + 2][j + 2],
+                    ]
+                    .to_vec(),
+                )?;
 
-                if s == "M.M.A.S.S" || s == "S.M.A.S.M" || s == "M.S.A.M.S" || s == "S.S.A.M.M" {
+                if s == "MMASS" || s == "SMASM" || s == "MSAMS" || s == "SSAMM" {
                     answer += 1;
                 }
             }

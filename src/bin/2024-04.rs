@@ -53,7 +53,7 @@ fn main() -> Result<()> {
         let xmas: Vec<u8> = "XMAS".bytes().collect();
         for i in 0..array.len() {
             for j in 0..array[i].len() {
-                if array[i][j] == 'X' as u8 {
+                if array[i][j] == xmas[0] {
                     'dir_loop: for dir in DIRECTIONS {
                         for idx in 1..=3 {
                             let ii = (i as i64) + dir.0 * idx;

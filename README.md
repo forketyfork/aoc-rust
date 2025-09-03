@@ -1,5 +1,9 @@
 # Template for solving Advent of Code puzzles in Rust with RustRover
 
+[![Build status](https://github.com/forketyfork/aoc-rust/actions/workflows/build.yml/badge.svg)](https://github.com/forketyfork/aoc-rust/actions/workflows/build.yml)
+[![MIT License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
+[![Rust](https://img.shields.io/badge/language-Rust-orange.svg)](https://www.rust-lang.org/)
+
 ## Usage
 
 1. Create a new project from the template repository:

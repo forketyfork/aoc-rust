@@ -18,7 +18,12 @@ pub fn parse_u32s(s: &str) -> Vec<u32> {
         .collect()
 }
 
+pub mod day2015_01;
+pub mod day2024_01;
+pub mod day2024_02;
+pub mod day2024_03;
 pub mod day2024_04;
+pub mod day2024_05;
 
 #[cfg(test)]
 mod tests {

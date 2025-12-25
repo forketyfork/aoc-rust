@@ -3,7 +3,7 @@ pub fn start_day(day: &str) {
 }
 
 use std::fs::File;
-use std::io::{BufRead, BufReader};
+use std::io::BufReader;
 
 /// Read the input file for a given day.
 pub fn read_input(day: &str) -> anyhow::Result<BufReader<File>> {

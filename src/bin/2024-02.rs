@@ -81,7 +81,7 @@ fn main() -> Result<()> {
             .filter_ok(|line| {
                 let chars: Vec<u8> = line.split(' ').map(|x| x.parse::<u8>().unwrap()).collect();
                 iter::once(usize::MAX)
-                    .chain((0..chars.len()).into_iter())
+                    .chain(0..chars.len())
                     .any(|skip_index| is_safe(chars.clone(), skip_index))
             })
             .count();

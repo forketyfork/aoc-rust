@@ -27,7 +27,7 @@ fn main() -> Result<()> {
 
     fn part1<R: BufRead>(reader: R) -> Result<isize> {
         let bytes = reader.bytes();
-        let braces = bytes.counts_by(|x| x.unwrap() == '(' as u8);
+        let braces = bytes.counts_by(|x| x.unwrap() == b'(');
         let left_braces = braces
             .get(&true)
             .iter()

@@ -4,13 +4,13 @@ version = "0.1.0"
 edition = "2021"
 
 [dependencies]
-anyhow = "1.0.93"
-code-timing-macros = { version = "0.0.5", features = ["release"] }
-const_format = "0.2.33"
+anyhow = "1.0.100"
+code-timing-macros = { version = "0.0.6", features = ["release"] }
+const_format = "0.2.35"
 
 # Additional recommended dependencies
-itertools = "0.13.0"
-regex = "1.11.1"
+itertools = "0.14.0"
+regex = "1.12.2"
 
 # rand
 # num
@@ -20,4 +20,7 @@ regex = "1.11.1"
 # ratatui
 
 [dev-dependencies]
-proptest = "1.4.0"
+proptest = "1.9.0"
+
+[features]
+tracing = []   # empty feature just to satisfy the macro

@@ -72,16 +72,16 @@ fn main() -> Result<()> {
             }
         });
 
-        let ordering: HashMap<u8, Vec<u8>> = ordering.iter().map(|&it| it).into_group_map();
+        let ordering: HashMap<u8, Vec<u8>> = ordering.iter().copied().into_group_map();
 
         let answer = lines
             .iter()
             .filter_map(|line| {
-                return if pass(line, &ordering) {
+                if pass(line, &ordering) {
                     line.get(line.len() / 2).map(|&x| x as usize)
                 } else {
                     None
-                };
+                }
             })
             .sum();
 
@@ -127,24 +127,24 @@ fn main() -> Result<()> {
         });
 
         let mut answer: usize = 0;
-        lines.iter().for_each(|&line| {
+        lines.iter().for_each(|line| {
             let sorted_line: Vec<String> = line
                 .iter()
-                .sorted_by(|&a, &b| {
-                    return if ordering.contains(format!("{}|{}", a, b).as_str()) {
+                .sorted_by(|a, b| {
+                    if ordering.contains(format!("{}|{}", a, b).as_str()) {
                         Ordering::Greater
                     } else if ordering.contains(format!("{}|{}", b, a).as_str()) {
                         Ordering::Less
                     } else {
                         Ordering::Equal
-                    };
+                    }
                 })
-                .map(|&s| s)
+                .cloned()
                 .collect();
-            if sorted_line != line {
+            if sorted_line != *line {
                 answer += sorted_line
                     .get(line.len() / 2)
-                    .map(|&x| x.parse::<usize>())
+                    .map(|x| x.parse::<usize>())
                     .unwrap()
                     .unwrap();
             }

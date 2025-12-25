@@ -56,13 +56,16 @@ pub fn part2<R: BufRead>(reader: R) -> Result<usize> {
     let mut answer = 0;
     for i in 0..array.len() - 2 {
         for j in 0..array[i].len() - 2 {
-            let s: String = String::from_utf8([
-                array[i][j],
-                array[i][j + 2],
-                array[i + 1][j + 1],
-                array[i + 2][j],
-                array[i + 2][j + 2],
-            ].to_vec())?;
+            let s: String = String::from_utf8(
+                [
+                    array[i][j],
+                    array[i][j + 2],
+                    array[i + 1][j + 1],
+                    array[i + 2][j],
+                    array[i + 2][j + 2],
+                ]
+                .to_vec(),
+            )?;
 
             if s == "MMASS" || s == "SMASM" || s == "MSAMS" || s == "SSAMM" {
                 answer += 1;

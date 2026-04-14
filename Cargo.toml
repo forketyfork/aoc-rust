@@ -21,7 +21,7 @@ regex = "1.12.3"
 # ratatui
 
 [dev-dependencies]
-proptest = "1.10.0"
+proptest = "1.11.0"
 
 [features]
 tracing = ["dep:tracing"]   # enables tracing support used by code_timing_macros

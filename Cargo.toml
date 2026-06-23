@@ -5,12 +5,12 @@ edition = "2024"
 
 [dependencies]
 anyhow = "1.0.102"
-code-timing-macros = { version = "0.0.6", features = ["release"] }
+code-timing-macros = { version = "0.0.7", features = ["release"] }
 const_format = "0.2.36"
 tracing = { version = "0.1.41", optional = true }
 
 # Additional recommended dependencies
-itertools = "0.14.0"
+itertools = "0.15.0"
 regex = "1.12.4"
 
 # rand
